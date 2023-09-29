@@ -1,0 +1,67 @@
+﻿#otsikko {
+    color: green;
+    text-align: left;
+}
+#kaksi {
+    color: red;
+    font-size: x-small;
+}
+#kolme {
+    color: forestgreen;
+    font-size: smaller;
+}
+#neljä {
+    color: greenyellow;
+    font-size: smaller;
+}
+#viisi {
+    color: green;
+    font-size: x-large;
+}
+#kuusi {
+    color: orange;
+    font-size: x-large;
+}
+#seitsemän {
+    color: aqua;
+    font-size: large;
+}
+#kahdeksan {
+    color: lightpink;
+    font-size: medium;
+}
+#yhdeksän {
+    color: purple;
+    font-size: smaller;
+}
+#kymmenen {
+    color: brown;
+    font-size: xx-small;
+}
+#otsikko2 {
+    font-family: "Audiowide"
+}
+#lore {
+    font-family: Cambria;
+}
+#lore2 {
+    font-family:Georgia;
+}
+#lore3 {
+    font-family:'Freestyle Script'
+}
+#lore4 {
+    font-family:monospace
+}
+#lore5 {
+    font-family:Pristina
+}
+#lore6 {
+    font-family:'Lucida Console'
+}
+#lore7 {
+    font-family:'Sitka Text'
+}
+#lore8 {
+    font-family:'Monotype Corsiva'
+}
