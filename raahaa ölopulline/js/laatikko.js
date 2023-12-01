@@ -46,13 +46,14 @@ function drop(e) {
 function lisaaTehtava() {
     // Lisää uusi siirrettävä objekti
     const newTask = document.createElement('div');
-    const taskId = 'task-' + taskCounter++;
+    const taskId = 'task-' + taskCounter;
     newTask.id = taskId;
-    newTask.textContent = 'Tehtävä ' + taskId.split('-')[1];
+    newTask.textContent = 'Tehtävä ' + taskCounter;
     newTask.draggable = true;
     newTask.classList.add('item');
     newTask.addEventListener('dragstart', dragStart);
     document.querySelectorAll('.box')[0].appendChild(newTask);
+
 }
 
 boxes.forEach(box => {
