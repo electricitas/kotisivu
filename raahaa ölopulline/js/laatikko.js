@@ -1,16 +1,8 @@
-const item = document.querySelector('.item');
-const boxes = document.querySelectorAll('.box');
-
-item.addEventListener('dragstart', dragStart);
-boxes.forEach(box => {
-    box.addEventListener('dragenter', dragEnter);
-    box.addEventListener('dragover', dragOver);
-    box.addEventListener('dragleave', dragLeave);
-    box.addEventListener('drop', drop);
-});
+ï»¿const boxes = document.querySelectorAll('.box');
+let taskCounter = 1;
 
 function dragStart(e) {
-    e.dataTransfer.setData('text/plain', e.target.textContent);
+    e.dataTransfer.setData('text/plain', e.target.id);
 }
 
 function dragEnter(e) {
@@ -31,28 +23,41 @@ function drop(e) {
     e.target.classList.remove('drag-over');
 
     const data = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(data);
 
-    if (data === 'Lisää tehtävä') {
-        // Lisää uusi siirrettävä objekti
-        const newTask = document.createElement('div');
-        newTask.textContent = 'Tehtävä ' + (boxes[0].childElementCount + 1);
-        newTask.draggable = true;
-        newTask.classList.add('item');
-        newTask.addEventListener('dragstart', dragStart);
-        boxes[0].appendChild(newTask);
-    } else {
-        // Siirrä olemassa oleva siirrettävä objekti
-        const draggable = document.querySelector('.item');
-        e.target.appendChild(draggable);
+    if (draggable.classList.contains('item')) {
+        // SiirrÃ¤ vain siirrettÃ¤vÃ¤t objektit
+        const destinationBox = e.target.closest('.box');
+        const isNewTask = !draggable.dataset.taskId;
+
+        if (isNewTask) {
+            // PÃ¤ivitÃ¤ tehtÃ¤vÃ¤n numero vain, jos se on uusi tehtÃ¤vÃ¤
+            const taskId = 'task-' + taskCounter++;
+            draggable.id = taskId;
+            draggable.textContent = 'TehtÃ¤vÃ¤ ' + taskId.split('-')[1];
+            draggable.dataset.taskId = taskId;
+        }
+
+        destinationBox.appendChild(draggable);
         draggable.classList.remove('hide');
     }
 }
+
 function lisaaTehtava() {
-    // Lisää uusi siirrettävä objekti
+    // LisÃ¤Ã¤ uusi siirrettÃ¤vÃ¤ objekti
     const newTask = document.createElement('div');
-    newTask.textContent = 'Uusi tehtävä ' + (document.querySelectorAll('.box')[0].childElementCount + 1);
+    const taskId = 'task-' + taskCounter++;
+    newTask.id = taskId;
+    newTask.textContent = 'TehtÃ¤vÃ¤ ' + taskId.split('-')[1];
     newTask.draggable = true;
     newTask.classList.add('item');
     newTask.addEventListener('dragstart', dragStart);
     document.querySelectorAll('.box')[0].appendChild(newTask);
 }
+
+boxes.forEach(box => {
+    box.addEventListener('dragenter', dragEnter);
+    box.addEventListener('dragover', dragOver);
+    box.addEventListener('dragleave', dragLeave);
+    box.addEventListener('drop', drop);
+});
